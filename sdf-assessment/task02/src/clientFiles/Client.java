@@ -26,7 +26,7 @@ public class Client {
                 break;
             case (2):
                 PORT = Integer.parseInt(_args[1]);
-                serverName = _args[2];
+                serverName = _args[0];
                 break;
         }
         

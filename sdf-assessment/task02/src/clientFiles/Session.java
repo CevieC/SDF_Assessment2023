@@ -54,9 +54,9 @@ public class Session{
         String result = br.readLine();
 
         List<Optional<Item>> resultList = br.lines()
-                                                .stream()
-                                                .flatMap(map -> map.values().stream())
-                                                .collect(Collectors.toList());
+                                          .stream()
+                                          .flatMap(map -> map.values().stream())
+                                          .collect(Collectors.toList());
 
         String[] lines = result.split(":");
 
@@ -71,7 +71,12 @@ public class Session{
         // }
         // itemMap.put(lines[0], lines[1]);
 
-        // after sorting, send back to clien using a writer
+        
+        // Section the items via product_start and end by checking what the string starts with
+        // Read the line, pass information to the class
+        // Create list object and sort it using comparator via price and rating
+        // check if item is within budget and add it to a select list
+        // write list back to server using output stream
         
         }
       }
