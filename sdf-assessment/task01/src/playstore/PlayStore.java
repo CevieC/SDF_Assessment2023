@@ -48,9 +48,9 @@ public class PlayStore {
 	public float getM_rating() { return this.m_rating; }
 
 
-    public static Map<String, List<PlayStore>> getMap(String filePath) throws IOException {
+    public static Map<String, List<PlayStore>> getMap(String _filePath) throws IOException {
         try {
-            FileReader reader = new FileReader(filePath);
+            FileReader reader = new FileReader(_filePath);
             BufferedReader br = new BufferedReader(reader);
     
             br.readLine(); // Skip the header line if present
@@ -67,29 +67,29 @@ public class PlayStore {
             br.close();
     
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filePath);
+            System.out.println("File not found: " + _filePath);
             e.printStackTrace();
         }
         return grouped;
         
     }
     
-    private static void incrementDiscardedCount(String category) {
-        discardedRecordsCountPerCategory.put(category, discardedRecordsCountPerCategory.getOrDefault(category, 0) + 1);
+    private static void incrementDiscardedCount(String _category) {
+        discardedRecordsCountPerCategory.put(_category, discardedRecordsCountPerCategory.getOrDefault(_category, 0) + 1);
     }
 
-    private static boolean isValidData(String[] fields) {
+    private static boolean isValidData(String[] _fields) {
         // Check if the rating field is not 'NaN'
-        if (fields[Constants.COL_RATING].equalsIgnoreCase("NaN")) {
-            incrementDiscardedCount(fields[Constants.COL_CATEGORY]);
+        if (_fields[Constants.COL_RATING].equalsIgnoreCase("NaN")) {
+            incrementDiscardedCount(_fields[Constants.COL_CATEGORY]);
             return false;
         }
     
         // Check if the rating is a valid float number
         try {
-            Float.parseFloat(fields[Constants.COL_RATING]);
+            Float.parseFloat(_fields[Constants.COL_RATING]);
         } catch (NumberFormatException e) {
-            incrementDiscardedCount(fields[Constants.COL_CATEGORY]);
+            incrementDiscardedCount(_fields[Constants.COL_CATEGORY]);
             return false;
         }
         return true;
