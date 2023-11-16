@@ -9,8 +9,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 
@@ -18,7 +24,8 @@ public class Session{
 
     private final Socket socket;
     boolean connected = true;
-    Map<String, String> itemMap = new HashMap<String, String>();
+    ArrayList<String> itemListObject = new ArrayList<String>();
+    // Map<String, String> itemMap = new HashMap<String, String>();
 
     public Session(Socket _socket) {
         socket = _socket;
@@ -43,14 +50,29 @@ public class Session{
       bw.flush();
       
       while (connected) {
+      
         String result = br.readLine();
-        String lines[] = result.trim().split(":");
-        
+
+        List<Optional<Item>> resultList = br.lines()
+                                                .stream()
+                                                .flatMap(map -> map.values().stream())
+                                                .collect(Collectors.toList());
+
+        String[] lines = result.split(":");
+
+        itemListObject.addAll(Arrays.asList(lines));
+        // if only line
+        itemListObject.stream().sorted(Comparator.comparingDouble(lines::getPrice))
+        .collect(Collectors.toList());
+
         // Store the result in a map, key : value pair
-        if(lines.length < 2){
-          continue;
-        }
-        itemMap.put(lines[0], lines[1]);
+        // if(lines.length < 2){
+        //   continue;
+        // }
+        // itemMap.put(lines[0], lines[1]);
+
+        // after sorting, send back to clien using a writer
+        
         }
       }
     }
