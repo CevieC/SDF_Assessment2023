@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 class Category {
@@ -64,12 +63,15 @@ public class PlayStore {
                 .filter(fields -> isValidData(fields))
                 .map(fields -> new PlayStore(fields[Constants.COL_APP], fields[Constants.COL_CATEGORY].toUpperCase(), Float.parseFloat(fields[Constants.COL_RATING])))
                 .collect(Collectors.groupingBy(PlayStore::getM_category));
+
+            br.close();
     
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filePath);
             e.printStackTrace();
         }
         return grouped;
+        
     }
     
     private static void incrementDiscardedCount(String category) {
@@ -93,8 +95,6 @@ public class PlayStore {
         return true;
     }
     
-    
-
     public static void sortCategory() {
         for (String cat : grouped.keySet()) {
             Category category = new Category();
@@ -125,11 +125,9 @@ public class PlayStore {
         }
     }
 
-
     // Calculates the data needed for display
     public static void display(){
-
-        // highest rating in a category
+        
         int count = 1;
         for (Category cat : catList) {
             System.out.println("Category " + count + " : " + cat.m_catName);
@@ -150,8 +148,8 @@ public class PlayStore {
         //         System.out.printf("\t%s, %f\n", app.getM_app(), app.getM_rating());
         //     }
 
-        //     int size = grouped.values().stream().mapToInt(List::size).sum();
-        //     System.out.printf("Total lines in file: <%d>", size);
+        int size = grouped.values().stream().mapToInt(List::size).sum();
+        System.out.printf("Total lines in file: <%d>", size);
         // }
     }
 
