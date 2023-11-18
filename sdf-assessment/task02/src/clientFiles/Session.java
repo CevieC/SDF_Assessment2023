@@ -2,7 +2,6 @@ package clientFiles;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,14 +33,6 @@ public class Session {
     OutputStream os = socket.getOutputStream();
     OutputStreamWriter ows = new OutputStreamWriter(os);
     BufferedWriter bw = new BufferedWriter(ows);
-
-    Console cons = System.console();
-
-    String line = cons.readLine("> ");
-    line = line.trim() + "\n";
-    bw.write(line);
-    bw.flush();
-
     
     int id = 0;
     String title = "";
@@ -50,7 +41,7 @@ public class Session {
 
     int itemCount = -1;
     
-    line = "";
+    String line = "";
     
     while (true) {
       if (itemCount == 0)
@@ -69,9 +60,7 @@ public class Session {
         itemCount = Integer.parseInt(splitStr(line));
       }
 
-      if (line.equals("prod_list"))
-        continue;
-      else if (line.equals("prod_start")) {
+      if (line.equals("prod_start")) {
         while (true) {
           line = br.readLine().trim();
           if (line.startsWith("prod_end")) {
