@@ -12,10 +12,10 @@ public class Item {
     }
 
     public Item(int _id, String _title, float _price, float _rating) {
-        m_prod_Id = 0;
-        m_title = "";
-        m_price = 0;
-        m_rating = 0;
+        m_prod_Id = _id;
+        m_title = _title;
+        m_price = _price;
+        m_rating = _rating;
     }
 
     public int getprod_Id() {return m_prod_Id;}
