@@ -10,13 +10,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-// import java.util.Arrays;
 import java.util.Comparator;
-// import java.util.HashMap;
-// import java.util.List;
-// import java.util.Map;
-// import java.util.Optional;
-// import java.util.stream.Collectors;
 
 public class Session {
 
@@ -24,7 +18,6 @@ public class Session {
   boolean connected = true;
   ArrayList<Item> itemListObject = new ArrayList<Item>();
   ArrayList<Item> selectedItems = new ArrayList<Item>();
-  // Map<String, String> itemMap = new HashMap<String, String>();
   float budget = 0;
   String requestID = "";
 
